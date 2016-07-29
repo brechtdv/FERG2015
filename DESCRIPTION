@@ -1,8 +1,8 @@
-Package: FERG
+Package: FERG2015
 Type: Package
-Title: DALY Calculation Framework for WHO/FERG
+Title: DALY Calculation Framework for WHO/FERG - 2015 revision
 Version: 0.1.0
-Date: 2015-07-16
+Date: 2016-07-29
 Authors@R: c(person("Brecht", "Devleesschauwer",
              role = c("aut", "cre"), email = "brechtdv@gmail.com"),
              person("Scott", "McDonald", role = "aut"))
