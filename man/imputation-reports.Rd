@@ -32,7 +32,6 @@ imputation_report(db, db_imputed, db_merged, pop, agent, agent_full,
     
   \item{db}{raw data frame}
   \item{db_imputed}{imputed data frame}
-  \item{pop}{vector of population size by country (*1e5)}
   \item{tab1_options}{list of formatting options for tables of absolute numbers}
   \item{tab2_options}{list of formatting options for tables of rates}
 }
