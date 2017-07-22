@@ -9,7 +9,7 @@
 \description{Functions to impute dataset; merge raw and imputed dataset; and save merged dataset.}
 
 \usage{
-impute(inc, WHOsub, model = "lognormal.txt", inits = NULL, 
+impute(inc, WHOsub, model = "lognormal2.txt", inits = NULL, 
     burnin = 5000, update = 5000)
 
 merge(db, db_imputed)

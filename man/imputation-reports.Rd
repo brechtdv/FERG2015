@@ -14,7 +14,7 @@ plot_missing(inc, WHOsub, agent, agent_full, save = FALSE)
 
 summarize_imputation(db, db_imputed)
 
-get_total_cases(db_merged, pop_2010)
+get_total_cases(db_merged, pop)
 
 imputation_report(db, db_imputed, db_merged, pop, agent, agent_full,
                   tab1_options = NULL, tab2_options = NULL)
@@ -28,7 +28,7 @@ imputation_report(db, db_imputed, db_merged, pop, agent, agent_full,
   \item{save}{logical flag; should image be saved?}
 
   \item{db_merged}{merged data frame}
-  \item{pop_2010}{vector of population size by country (*1e5)}
+  \item{pop}{vector of population size by country (*1e5)}
     
   \item{db}{raw data frame}
   \item{db_imputed}{imputed data frame}
