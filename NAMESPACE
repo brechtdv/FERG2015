@@ -7,7 +7,7 @@ importFrom(scales, hue_pal)
 importFrom(graphics, abline, axis, axTicks, box, legend, matplot, par)
 importFrom(grDevices, boxplot.stats, dev.new, graphics.off, png, tiff)
 importFrom(stats, approx, median, optim, optimize, qbeta, qgamma, qlnorm, quantile, rbeta, rgamma, rlnorm, runif, sd)
-importFrom(utils, head, read.table, setTxtProgressBar, tail, txtProgressBar)
+importFrom(utils, packageVersion, head, read.table, setTxtProgressBar, tail, txtProgressBar)
 
 export(
   ## imputation functions
