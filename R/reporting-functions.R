@@ -45,6 +45,8 @@ function(agent, date_DALY, fb = FALSE) {
 
   label <- ifelse(fb, "fb/FB_DALY_", "DALY_")
 
+  region <- factor(crpop_2015$WHORegion)
+
   pb <- txtProgressBar(max = length(crpop_2015$ISO3), style = 3)
   for (i in seq_along(crpop_2015$ISO3)) {
     ## load 'DALYrun' and 'incidence' per country
@@ -53,7 +55,7 @@ function(agent, date_DALY, fb = FALSE) {
     load(file)
 
     ## which region?
-    r <- as.numeric(regions_2015[i])
+    r <- as.numeric(region[i])
 
     ## set K and r
     if (length(DALYrun_region[[r]]@K) == 0)
@@ -130,6 +132,8 @@ function(agent, date_DALY, fb = FALSE) {
 
   label <- ifelse(fb, "fb/FB_DALY_", "DALY_")
 
+  subregion <- factor(crpop_2015$SUB)
+
   pb <- txtProgressBar(max = length(crpop_2015$ISO3), style = 3)
   for (i in seq_along(crpop_2015$ISO3)) {
     ## load 'DALYrun' and 'incidence' per country
@@ -138,7 +142,7 @@ function(agent, date_DALY, fb = FALSE) {
     load(file)
 
     ## which region?
-    r <- as.numeric(countryRegion_2015$WHOSubregion[i])
+    r <- as.numeric(subregion[i])
 
     ## set K and r
     if (length(DALYrun_subregion[[r]]@K) == 0)
@@ -223,9 +227,11 @@ function(x, what, rate = FALSE,
 
   ## derive regions
   if (length(x[[1]]) == 6) {
-    regions_2015 <- countryRegion_2015$WHORegion
+    regions_2015 <- crpop_2015$WHORegion
+
   } else if (length(x[[1]]) == 14) {
-    regions_2015 <- countryRegion_2015$WHOSubregion
+    regions_2015 <- crpop_2015$SUB
+
   } else {
     stop("regions not recognized.")
   }
@@ -319,7 +325,7 @@ function(x, what, rate = FALSE,
   }
 
   ## finalize object
-  rownames(out) <- c(sort(levels(regions_2015)), "GLOBAL")
+  rownames(out) <- c(sort(unique(regions_2015)), "GLOBAL")
   colnames(out) <- c("mean", "median", "2.5%", "97.5%", "sd")
   return(out)
 }
