@@ -38,6 +38,11 @@ function(XL){
 
   ## if all checks were successful
   message("All checks were successful.")
+
+  ## show data sheets
+  cat(sep = "",
+      "\nAvailable data sheets:\n",
+       paste(" ", sheets[-c(1:2)], collapse = "\n"), "\n")
 }
 
 
