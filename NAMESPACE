@@ -1,4 +1,4 @@
-import(methods, XLConnect, knitr, xtable, rjags, ggplot2)
+i_mport(methods, XLConnect, knitr, xtable, rjags, ggplot2)
 importFrom(coda, traceplot, densplot, gelman.plot, gelman.diag)
 importFrom(prevalence, betaPERT)
 importFrom(rworldmap, getMap, mapPolys, addMapLegend)
@@ -13,7 +13,7 @@ export(
   ## imputation functions
   extractIncidence, check_db, plot_missing,
   impute, summarize_imputation, imputation_report,
-  merge, save_merged_db, get_total_cases,
+  merge_imp_raw, save_merged_db, get_total_cases,
 
   ## DALY calculation functions
   readDatabase, check_XL, read_XL, get_contrib, get_local_LE,
