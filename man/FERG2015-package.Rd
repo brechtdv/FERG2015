@@ -15,14 +15,15 @@ The \pkg{FERG2015} package provides functions for calculating and reporting DALY
   \tabular{ll}{
     Package:    \tab  FERG2015\cr
     Type:       \tab  Package\cr
-    Version:    \tab  0.1.0\cr
-    Date:       \tab  2016-07-29\cr
+    Version:    \tab  0.2.0\cr
+    Date:       \tab  2017-07-22\cr
     Authors:    \tab  Brecht Devleesschauwer, Scott McDonald\cr
     Maintainer: \tab  Brecht Devleesschauwer <\email{brechtdv@gmail.com}>\cr
-    Depends:    \tab  R (>= 3.0.0), methods\cr
+    Depends:    \tab  R (>= 3.4.0), methods\cr
     Imports:    \tab  XLConnect, knitr, xtable, lme4, rjags, ggplot2, prevalence, rworldmap, RColorBrewer\cr
+    SystemRequirements: \tab JAGS (>= 4.2.0) (see \url{http://mcmc-jags.sourceforge.net})\cr
     License:    \tab  GPL (>= 2)\cr
-    LazyLoad:   \tab  yes\cr
+    LazyData:   \tab  yes\cr
 }
 
 Available functions in the \pkg{FERG2015} package:
