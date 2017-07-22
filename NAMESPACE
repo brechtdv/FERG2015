@@ -1,4 +1,4 @@
-i_mport(methods, XLConnect, knitr, xtable, rjags, ggplot2)
+import(methods, XLConnect, knitr, xtable, rjags, ggplot2)
 importFrom(coda, traceplot, densplot, gelman.plot, gelman.diag)
 importFrom(prevalence, betaPERT)
 importFrom(rworldmap, getMap, mapPolys, addMapLegend)
