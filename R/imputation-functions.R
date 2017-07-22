@@ -8,7 +8,7 @@
 ###---| readDatabase ........ read in Excel workbook using XLConnect
 ###-----| parseDistrDA ...... calculate mean incidence
 ###-- impute ................ impute missing values based on a RE model
-###-- merge ................. merge observed with imputed values
+###-- merge_raw_imp ......... merge observed with imputed values
 ###-- save_merged_db ........ save merged values to workbook
 
 

@@ -1,7 +1,7 @@
 \name{imputation-functions}
 \alias{imputation-functions}
 \alias{impute}
-\alias{merge}
+\alias{merge_raw_imp}
 \alias{save_merged_db}
 
 \title{Main Imputation Functions}
@@ -12,7 +12,7 @@
 impute(inc, WHOsub, model = "lognormal2.txt", inits = NULL, 
     burnin = 5000, update = 5000)
 
-merge(db, db_imputed)
+merge_raw_imp(db, db_imputed)
 
 save_merged_db(db_merged, file, sheet)
 }
@@ -31,7 +31,7 @@ save_merged_db(db_merged, file, sheet)
   \item{sheet}{sheet name}
 }
 
-\value{\code{impute} returns the imputed dataset; \code{merge} returns the merged dataset; \code{save_merged_db} uses \pkg{XLConnect} to save the merged dataset to Excel.}
+\value{\code{impute} returns the imputed dataset; \code{merge_raw_imp} returns the merged dataset; \code{save_merged_db} uses \pkg{XLConnect} to save the merged dataset to Excel.}
 
 \seealso{\code{\link{imputation-reports}} for functions that report on imputation activity.}
 

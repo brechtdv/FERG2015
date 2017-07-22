@@ -13,7 +13,7 @@ export(
   ## imputation functions
   extractIncidence, check_db, plot_missing,
   impute, summarize_imputation, imputation_report,
-  merge_imp_raw, save_merged_db, get_total_cases,
+  merge_raw_imp, save_merged_db, get_total_cases,
 
   ## DALY calculation functions
   readDatabase, check_XL, read_XL, get_contrib, get_local_LE,
