@@ -1,38 +1,5 @@
 ###=========================================================================#
 ### Functions to support Calculation Tool Activity
-###
-### Start  22.11.2013 Brecht & Scott
-### Update 27.11.2013 merge_nodes, rpert
-### Update 30.11.2013 pop_by_region_2015
-### Update 08.12.2013 'sim' gains argument 'type'
-### Update 08.12.2013 <DM> gains column 'LOCAL'
-###                   |-> 'read_XL' understands 'n_row'
-###                   |-> 'get_DALY_model' understands 'TYPE'
-### Update 08.12.2013 'stuff_DALY_model' understands dur == 'Lifelong'
-### Update 08.12.2013 'pre_sample' understands 'LOCAL'
-### Update 08.12.2013 'stratify' understands 'LOCAL'
-### Update 23.12.2013 introduce 'sim_Beta' and 'sim_Gamma'
-### Update 23.12.2013 fix bug in 'sim_percentiles'
-### Update 26.12.2013 fix bug in 'stratify' (target, target_pop)
-### Update 05.01.2014 'getDALY_per_country' gains argument 'n_samples'
-### Update 05.01.2014 'merge_nodes' derives 'n_samples'
-### Update 05.01.2014 <DM> gains column 'INCIDENCE'
-###                   |-> 'get_DALY_model' sees 6 columns
-###                   |-> 'stratify' and 'merge_nodes' use all nodes
-###                   |-> new function 'get_incidence'
-###                   |-> new function 'sum_list'
-### Update 05.01.2014 fix bug in 'stuff_DALY_model' (dur: DB[[node]])
-### Update 14.02.2014 add lognormal distribution to 'sim_percentiles'
-### Update 14.02.2014 new function 'sim_lognorm'
-### Update 14.02.2014 new function 'optim_lognorm'
-### Update 17.02.2014 'split_age' uses country specific age dist
-### Update 04.06.2014 'stratify' now understands 10 Groups
-### Update 06.06.2014 'pre_sample' converts 'pars' to numeric
-### Update 06.06.2014 fix bug in 'stratify'
-### Update 06.06.2014 fix bug in 'get_DALY_model' when strat needed
-### Update 13.07.2014 allow user to select LE table
-### Update 13.07.2014 'getDALY_per_country' measures duration
-### Update 28.07.2014 'stuff_DALY_model' uses local_LE when dur == 'Lifelong'
 ###=========================================================================#
 
 ###=========================================================================#
@@ -114,6 +81,17 @@ function(XL_wb, DM, KEY) {
   dists <- c("Percentiles", "Mean & 95%CI", "Min/Mode/Max", "Gamma", "Beta")
 
   for (node in seq(n_nodes)) {
+    ## check country order
+    if (DM[node, "LOCAL"] == "TRUE") {
+      countries <-
+        readWorksheet(XL_wb, sheet = node + 2,
+                      startRow = 8, endRow = 202,
+                      startCol = 2, endCol = 2)[[1]]
+      if(!all(countries == crpop_2015$Country)) {
+        stop("Incorrect country sequence in node ", node, ".")
+      }
+    }
+
     ## node info
     node_info <- DM[node, ]
 
