@@ -212,5 +212,5 @@ get_local_LE <-
 function(country) {
   if (class(country) == "character") 
     country <- which(crpop_2015$Country == country)
-  return(local_LE[[country]])
+  return(local_LE_2015[[country]])
 }

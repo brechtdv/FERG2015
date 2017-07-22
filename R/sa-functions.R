@@ -204,9 +204,9 @@ function(agent, date_DALY, exp) {
   contrib <- get_contrib(list(DALYrun))
 
   ## define progress bar
-  pb <- txtProgressBar(max = NumCountries, style = 3)
+  pb <- txtProgressBar(max = NumCountries_2015, style = 3)
 
-  for (i in seq(NumCountries)) {
+  for (i in seq(NumCountries_2015)) {
     ## load 'DALYrun' & 'incidence' per country
     file <-
       paste0("DALY_", agent, "_", crpop_2015$ISO3[i], "-", date_DALY, ".RData")

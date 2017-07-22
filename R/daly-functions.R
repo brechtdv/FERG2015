@@ -123,7 +123,7 @@ function(XL_wb, DM, KEY) {
 
     Y <- locY(KEY[1, node + 1])
     X <- locX(KEY[1, node + 1])
-    n_row <- ifelse(DM[node, "LOCAL"] == "TRUE", NumCountries, 1)
+    n_row <- ifelse(DM[node, "LOCAL"] == "TRUE", NumCountries_2015, 1)
     n_col <- c(9, 3, 3, 2, 2)[which(data$dist == dists)]
 
     data$data <-
@@ -863,7 +863,7 @@ function(country, DALY, INC, DB, DM, LE) {
           stop("'Lifelong' can only occur in 'fixed' distribution")
         dur_pars <-
           c(getLE(x = matrix(rep(FERG_means, 2), nrow = 1),
-                  LE = local_LE[[country]],
+                  LE = local_LE_2015[[country]],
                   n_agegroups = length(FERG_means)))
         dur_strt <- "full"
       }
@@ -918,9 +918,9 @@ function(agent, DB, DM, today,
   start_time <- Sys.time()
 
   ## define progress bar
-  pb <- txtProgressBar(max = NumCountries, style = 3)
+  pb <- txtProgressBar(max = NumCountries_2015, style = 3)
 
-  for (i in seq(NumCountries)) {
+  for (i in seq(NumCountries_2015)) {
     ## sample from INC and PROB distributions
     samples <- pre_sample(i, DB, DM, n_samples)
 
