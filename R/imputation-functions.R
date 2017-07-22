@@ -1,12 +1,5 @@
 ###=========================================================================#
 ### Functions to support Data Adjustment Activity
-###
-### Start  05.02.2014 Scott
-### Update 14.02.2014 'impute' now also returns 'tau', 'mu.c', 'mu.tau'
-### Update 14.02.2014 'extractIncidence' now recognizes 'sheet'
-### Update 15.02.2014 'impute' now generates diagnostic plots
-### Update 06.08.2014 'parseDistrDA' now recognizes U(2.5;97.5)
-### Update 06.08.2014 'impute' gains options 'burnin', 'update'
 ###=========================================================================#
 
 ###=========================================================================#
@@ -45,31 +38,31 @@ function(file, sheet) {
   ## extract data from sheet
   sheet_data <-
     readWorksheet(wb, sheet,
-                  startRow = 8, endRow = 200, 
+                  startRow = 8, endRow = 202, 
                   startCol = 2, endCol = 16)
 
   ## organize data into data.frame
-  db192 <- sheet_data[, c(1, 7:15)]
-  db192$WHOsub <- paste(sheet_data[, 2], sheet_data[, 3], sep = "")
-  db192$Inc <- NA
-  names(db192) <- c("country", paste("c", 1:9, sep = ""), "WHOsub", "Inc")
+  db194 <- sheet_data[, c(1, 7:15)]
+  db194$WHOsub <- paste(gsub("O", "", sheet_data[, 2]), sheet_data[, 3])
+  db194$Inc <- NA
+  names(db194) <- c("country", paste("c", 1:9, sep = ""), "WHOsub", "Inc")
 
   ## identify missing values
-  is_na <- apply(db192[, 2:10], 1, function(x) all(is.na(x)))
+  is_na <- apply(db194[, 2:10], 1, function(x) all(is.na(x)))
 
   ## calculate mean for countries with values
-  for (i in seq(NumCountries_2005)[!is_na]) {
-    db192$Inc[i] <- parseDistrDA(db192[i, 2:10], "Percentiles")[[2]]
+  for (i in seq(NumCountries_2015)[!is_na]) {
+    db194$Inc[i] <- parseDistrDA(db194[i, 2:10], "Percentiles")[[2]]
   }
 
   ## reorganise 'db'
-  db192 <- db192[, c("country", "WHOsub", "Inc", paste("c", 1:9, sep = ""))]
+  db194 <- db194[, c("country", "WHOsub", "Inc", paste0("c", 1:9))]
 
   ## seems to be necessary for some agent-databases...
-  db192 <- transform(db192, Inc = as.numeric(db192$Inc))
+  db194 <- transform(db194, Inc = as.numeric(db194$Inc))
 
   ## return data.frame
-  return(db192)
+  return(db194)
 }
 
 
@@ -154,7 +147,7 @@ function(cells, disttype) {
 ## IMPUTE ------------------------------------------------------------------#
 
 impute <-
-function(inc, WHOsub, model = "lognormal.txt",
+function(inc, WHOsub, model = "lognormal2.txt",
          inits = NULL, burnin = 5000, update = 5000) {
   ## define 'data' list
   data <-
@@ -206,7 +199,7 @@ function(inc, WHOsub, model = "lognormal.txt",
 ##--------------------------------------------------------------------------#
 ## MERGE -------------------------------------------------------------------#
 
-merge <-
+merge_raw_imp <-
 function(db, db_imputed) {
   ## identify missing values
   is_na <- is.na(db$Inc)

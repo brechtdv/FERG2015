@@ -55,11 +55,10 @@ function(db) {
     stop("'db$Inc' is not numeric.")
 
   ## check if countries and subregions are specified in correct order
-  if (!all(db$country == crpop_2005$Country))
-    stop("'db$country' does not correspond to 'crpop_2005$Country'.")
-  if (!all(db$WHOsub ==
-           with(crpop_2005, paste(WHORegion, WHOsubRegion, sep = ""))))
-    stop("'db$WHOsub' does not correspond to 'crpop_2005'.")
+  if (!all(db$country == crpop_2015$Country))
+    stop("'db$country' does not correspond to 'crpop_2015'.")
+  if (!all(db$WHOsub == crpop_2015$SUB))
+    stop("'db$WHOsub' does not correspond to 'crpop_2015'.")
 
   ## if all checks were successful
   message("All checks were successful.")

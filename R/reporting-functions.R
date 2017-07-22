@@ -1,50 +1,5 @@
 ###=========================================================================#
 ### Processing script to support Reporting Activity
-### First  22.11.2013 Scott & Brecht
-### Update 01.12.2013 new function 'get_contrib'
-### Update 02.12.2013 'DALY_map' gains argument 'palette' and 'cat'
-### Update 28.12.2013 new function 'getDALY_per_subregion'
-### Update 28.12.2013 'summarize' recognizes regions
-### Update 28.12.2013 'DALY_map' recognizes regions
-### Update 28.12.2013 'FERG_report' recognizes regions
-### Update 05.01.2014 'getDALY_per_region' recognizes incidence
-### Update 05.01.2014 'getDALY_per_subregion' recognizes incidence
-### Update 05.01.2014 'summarize' recognizes incidence
-### Update 09.01.2014 'summarize' calculates DALYs per case
-### Update 13.02.2014 update to 'DALY_map'
-### Update 13.02.2014 new function 'plot_missing'
-### Update 13.02.2014 new function 'summarize_imputation'
-### Update 13.02.2014 new function 'imputation_report'
-### Update 14.02.2014 new function 'get_total_cases'
-### Update 14.02.2014 add cases to imputation report
-### Update 15.02.2014 add model & WHOsubregions to imputation report
-### Update 15.02.2014 add population to 'get_total_cases'
-### Update 15.02.2014 add median to 'summarize_imputation'
-### Update 15.02.2014 'imputation_report' applies specific file name
-### Update 15.02.2014 'imputation_report' gains args 'tab_options'
-### Update 15.02.2014 'plot_missing' recognizes country/region data
-### Update 15.02.2014 'plot_missing' recognizes 'agent_full'
-### Update 17.02.2014 'FERG_report' applies specific file name
-### Update 17.02.2014 'FERG_report' gains argument 'scale'
-### Update 22.02.2014 'summarize' gains argument 'denom'
-### Update 22.02.2014 'DALY_map' recognizes region
-### Update 22.02.2014 'DALY_map' gains argument 'legend_digits'
-### Update 05.04.2014 fix error message in 'summarize' when cases == 0
-### Update 09.04.2014 'DALY_map' gains argument 'type'
-### Update 09.04.2014 'DALY_map' can now plot incidence and mortality
-### Update 09.04.2014 'FERG_report' recognizes regions
-### Update 09.04.2014 'FERG_report' gains argument 'denom'
-### Update 09.04.2014 'summarize' gains argument 'age'
-### Update 09.04.2014 'summarize' gains argument 'names'
-### Update 15.06.2014 'FERG_report' deletes .toc and .out
-### Update 15.06.2014 'summarize' gains argument 'drilldown'
-### Update 19.06.2014 'summarize' loses argument 'drilldown'
-### Update 19.06.2014 'summarize' recognizes vector of 'names'
-### Update 15.06.2014 'FERG_report' gains argument 'add'
-### Update 24.07.2014 new function 'mean_age'
-### Update 01.08.2014 'DALY_map' now plots medians instead of means
-### Update 03.08.2014 'FERG_report' gains arguments 'fb', 'exp', 'DALY_total'
-### Update 03.08.2014 'summarize' applies 'na.rm=TRUE'
 ###=========================================================================#
 
 ###=========================================================================#
@@ -73,20 +28,20 @@ function(agent, date_DALY, fb = FALSE) {
   incidence <- NULL
 
   DALYrun_region <-
-    list(AFRO =  new("DALYrun"), 
-         AMRO =  new("DALYrun"),
-         EMRO =  new("DALYrun"),
-         EURO =  new("DALYrun"),
-         SEARO = new("DALYrun"),
-         WPRO =  new("DALYrun"))
+    list(AFR =  new("DALYrun"), 
+         AMR =  new("DALYrun"),
+         EMR =  new("DALYrun"),
+         EUR =  new("DALYrun"),
+         SEAR = new("DALYrun"),
+         WPR =  new("DALYrun"))
 
   incidence_region <-
-    list(AFRO =  numeric(), 
-         AMRO =  numeric(),
-         EMRO =  numeric(),
-         EURO =  numeric(),
-         SEARO = numeric(),
-         WPRO =  numeric())
+    list(AFR =  numeric(), 
+         AMR =  numeric(),
+         EMR =  numeric(),
+         EUR =  numeric(),
+         SEAR = numeric(),
+         WPR =  numeric())
 
   label <- ifelse(fb, "fb/FB_DALY_", "DALY_")
 
@@ -142,36 +97,36 @@ function(agent, date_DALY, fb = FALSE) {
   incidence <- NULL
 
   DALYrun_subregion <-
-    list(AFRO_D  = new("DALYrun"),
-         AFRO_E  = new("DALYrun"),
-         AMRO_A  = new("DALYrun"),
-         AMRO_B  = new("DALYrun"),
-         AMRO_D  = new("DALYrun"),
-         EMRO_B  = new("DALYrun"),
-         EMRO_D  = new("DALYrun"),
-         EURO_A  = new("DALYrun"),
-         EURO_B  = new("DALYrun"),
-         EURO_C  = new("DALYrun"),
-         SEARO_B = new("DALYrun"),
-         SEARO_D = new("DALYrun"),
-         WPRO_A  = new("DALYrun"),
-         WPRO_B  = new("DALYrun"))
+    list(AFR_D  = new("DALYrun"),
+         AFR_E  = new("DALYrun"),
+         AMR_A  = new("DALYrun"),
+         AMR_B  = new("DALYrun"),
+         AMR_D  = new("DALYrun"),
+         EMR_B  = new("DALYrun"),
+         EMR_D  = new("DALYrun"),
+         EUR_A  = new("DALYrun"),
+         EUR_B  = new("DALYrun"),
+         EUR_C  = new("DALYrun"),
+         SEAR_B = new("DALYrun"),
+         SEAR_D = new("DALYrun"),
+         WPR_A  = new("DALYrun"),
+         WPR_B  = new("DALYrun"))
 
   incidence_subregion <-
-    list(AFRO_D  = numeric(),
-         AFRO_E  = numeric(),
-         AMRO_A  = numeric(),
-         AMRO_B  = numeric(),
-         AMRO_D  = numeric(),
-         EMRO_B  = numeric(),
-         EMRO_D  = numeric(),
-         EURO_A  = numeric(),
-         EURO_B  = numeric(),
-         EURO_C  = numeric(),
-         SEARO_B = numeric(),
-         SEARO_D = numeric(),
-         WPRO_A  = numeric(),
-         WPRO_B  = numeric())
+    list(AFR_D  = numeric(),
+         AFR_E  = numeric(),
+         AMR_A  = numeric(),
+         AMR_B  = numeric(),
+         AMR_D  = numeric(),
+         EMR_B  = numeric(),
+         EMR_D  = numeric(),
+         EUR_A  = numeric(),
+         EUR_B  = numeric(),
+         EUR_C  = numeric(),
+         SEAR_B = numeric(),
+         SEAR_D = numeric(),
+         WPR_A  = numeric(),
+         WPR_B  = numeric())
 
   label <- ifelse(fb, "fb/FB_DALY_", "DALY_")
 
@@ -497,7 +452,7 @@ function(DALY, agent, agent_full, dm_file, today,
 plot_missing <-
 function(inc, WHOsub, agent, agent_full, save = FALSE) {
   x <- data.frame(inc = inc, WHOsub = WHOsub, stringsAsFactors = FALSE)
-  x$ISO <- toupper(countryRegion_2015$ISO3)[-c(152, 164)]  # cf 2005
+  x$ISO <- toupper(crpop_2015$ISO3)
   x$is_data <- !is.na(x$inc)
   is_data_region <- tapply(inc, WHOsub, function(x) !all(is.na(x)))
 
@@ -582,7 +537,7 @@ function(db, db_imputed) {
   reg_fit$n_data <-
     paste(
       n_obs_WHOsub, "/",
-      with(crpop_2005,
+      with(crpop_2015,
            tapply(Country, paste(WHORegion, WHOsubRegion), length)),
       sep = "")
 
@@ -629,23 +584,17 @@ function(db, db_imputed, db_merged, pop, agent, agent_full,
 ## OBTAIN CASES BY WHO SUBREGION & TOTAL -----------------------------------#
 
 get_total_cases <-
-function(db_merged, pop_2010) {
+function(db_merged, pop) {
   ## simulate inc per country
   inc <-
     t(apply(db_merged, 1,
             function(x) sim(1e3, "Percentiles", x, "INC")))
 
-  ## duplicate Serbia/Montenegro, Sudan/South-Sudan
-  inc <-
-    rbind(inc[1:151, ], inc[151, ],
-          inc[152:162, ], inc[162, ],
-          inc[163:192, ])
-
   ## simulate cases per country
-  cases <- inc * pop_2010
+  cases <- inc * pop
 
   ## sum cases per WHO subregion
-  cases_per_subregion <- rowsum(cases, countryRegion_2015$WHOSub)
+  cases_per_subregion <- rowsum(cases, crpop_2015$SUB)
 
   ## sum cases globally
   cases_total <- colSums(cases_per_subregion)
@@ -653,7 +602,7 @@ function(db_merged, pop_2010) {
   ## create summary data.frame
   out <-
     data.frame(
-      c(levels(countryRegion_2015$WHOSub),
+      c(sort(unique(crpop_2015$SUB)),
         "GLOBAL"),
       c(rowMeans(cases_per_subregion),
         mean(cases_total)),
@@ -665,11 +614,13 @@ function(db_merged, pop_2010) {
         quantile(cases_total, 0.975)),
       c(apply(cases_per_subregion, 1, sd),
         sd(cases_total)),
-      c(tapply(apply(Popul_2015, 3, sum), countryRegion_2015$WHOSubregion, sum),
+      c(tapply(apply(Popul_2015, 3, sum), crpop_2015$SUB, sum),
         sum(Popul_2015)))
 
-  rownames(out) <- NULL
-  colnames(out) <- c("WHOsub", "mean", "median", "2.5%", "97.5%", "sd", "pop")
+  rownames(out) <-
+    NULL
+  colnames(out) <-
+    c("WHOsub", "mean", "median", "2.5%", "97.5%", "sd", "pop")
 
   ## return summary data.frame
   return(out)
