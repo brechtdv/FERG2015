@@ -1,6 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/brechtdv/FERG2015.svg?branch=master)](https://travis-ci.org/brechtdv/FERG2015)
 
-## FERG2015 package (version 0.2.0)
+## FERG2015 package (version 0.3.0)
 ### DALY Calculation Framework for WHO/FERG - 2015 revision
 
 The `FERG` package provides functions for calculating and reporting DALYs in the framework of WHO's [Foodborne Disease Burden Epidemiology Reference Group](http://www.who.int/entity/foodsafety/foodborne_disease/ferg/en/) work towards the global burden of foodborne disease. The DALY calculation framework of the FERG package is based on the [`DALY` package](http://cran.r-project.org/web/packages/DALY/index.html).
