@@ -1,15 +1,5 @@
 ###=========================================================================#
-### Source Attribution functions
-### First  28.07.2014 Brecht
-### Update 03.08.2014 Add 'incidence' to 'apply_prop_fb()' 
-### Update 03.08.2014 'get_global()' gains argument 'by_region'
-### Update 11.08.2014 fix bug in 'apply_prop_fb()'
-### Update 11.08.2014 add 'dots' to 'summary_stats()'
-### Update 16.07.2015 change sa_plot colnames
-###=========================================================================#
-
-###=========================================================================#
-###== FUNCTIONS ============================================================#
+###== SOURCE ATTRIBUTION FUNCTIONS =========================================#
 ###-- generate_samples ........ generate normalized samples
 ###-- normalize_by_food ....... normalize samples by proportion foodborne
 ###-- summary_stats ........... summarize samples
@@ -269,7 +259,7 @@ function(x, what, by_region = FALSE,
   if (length(x[[1]]) == 6) {
     regions_2015 <- countryRegion_2015$WHORegion
   } else if (length(x[[1]]) == 14) {
-    regions_2015 <- countryRegion_2015$WHOSubregion
+    regions_2015 <- countryRegion_2015$SUB
   } else {
     stop("regions not recognized.")
   }
